@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pharmacy</title>
+    <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tesseract.js OCR demo</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/ocr.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/4414288e8e.js"></script>
+    <script src="Js/tesseract.min.js"></script>
+    <style>
+        body{
+            width: 97vw;
+        }
+        #sec{
+            position: relative;
+            margin-left: 33rem;
+        }
+        #sec01{
+            width: 50rem;
+
+        }
+        #image-preview{
+           width: 300px;
+            min-height: 100px;
+            border: 2px solid white;
+            margin-top: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+
+        }
+        #image-preview__image{
+            display: none;
+            width: 100%;
+        }
+        section>div:nth-child(1)>section:nth-child(1)>main>div:nth-child(1)>div:nth-child(2)>div:nth-child(3){
+            display: none;
+        }
+        #home{
+            font-size: 2.5rem;
+            font-family: cursive;
+            font-weight: bolder;
+            color: white;
+        }
+        #pa{
+            position: absolute;
+            margin: auto;
+            left: 50vw;
+            top: 3rem;
+            color: black;
+            font-size: 2rem;
+            font-family:fantasy;
+            font-weight: bold;
+        }
+        #log{
+            display: none;
+        }
+        nav{
+            width: 99vw;
+            margin:0;
+            padding: 0;
+
+        }
+        .table{
+            border-collapse: collapse;
+            font-size: 1.2rem;
+            width: 30vw;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            text-align: center;
+            margin:auto;
+            position: absolute;
+            right: 2rem;
+            top:10rem;
+        }
+
+        .table thead tr{
+            background-color:#42a940;
+            color:white;
+            text-align:center;
+        }
+
+        .table th,
+        .table td{
+            padding:4px 2px;
+            font-family:'Font Awesome 5 Free';
+        }
+
+        th{
+            border:1px solid white;
+
+        }
+
+        .table tbody tr{
+            border-bottom:1px solid grey;
+
+        }
+
+        .table tbody tr:nth-child(even){
+            background-color:#b9b5bc;
+
+        }
+
+        .table tbody tr:last-of-type{
+            border-bottom:2px solid blue;
+
+        }
+        #videoDiv{
+            position: absolute;
+            top:20rem;
+            left:-35rem;
+            margin: auto;
+        }
+        #label{
+            position: absolute;
+            margin:auto;
+            left:-50rem;
+        }
+        .homePageLbls{
+            height: 220px;
+            width: 300px;
+            display: flex;
+            flex-direction: row;
+            top: 80px;
+            left: -50px;
+            position: relative;
+
+        }
+        .homePageLbls>div{
+            background-color: peru;
+            align-items: center;
+            position: relative;
+            margin-left: 20px;
+            opacity: 50%;
+            border-radius: 20px;
+            box-shadow: 2px 2px 6px 2px;
+        }
+        .homePageLbls>div>h1{
+            position: relative;
+            top: -16px;
+            left: 0px;
+            color: darkred;
+        }
+        .homePageLbls>div>h2{
+            position: relative;
+            left: 0;
+            top: -30px;
+            font-size: 80px;
+        }
+        .inputfile + label{
+            font-size: 15px;
+        }
+        #button1{
+            margin-left: 5rem;
+        }
+        slot-container .container{
+            width:400px;
+            height:400px;
+            position: absolute;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            margin: auto;
+            /*border:1px solid red;*/
+
+        }
+        #cash{
+            top: 12rem;
+            position: relative;
+            background-color: lightblue;
+            border-radius: 10px;
+            width: 40%;
+            height: 41%;
+            padding: 2rem;
+        }
+        slot-container h1{
+            font-size: 1.5rem;
+            color:white;
+            background-color: #0a53be;
+            margin: 0;
+            padding:1rem;
+        }
+        #counter {
+            left: 2rem;
+            position: relative;
+            font-size: 18px;
+            color: green;
+            font-weight: bold;
+        }
+        #time {
+            left: 2rem;
+            position: relative;
+            font-size: 18px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div  class="container-fluid">
+        <a id="home" class="navbar-brand" href="#">Wizard Pharmacy</a>
+        <h1 id="pa" href=""> Place Order</h1>
+
+        <button id=" homeBtn" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!--<div id=" homeBtn" style="background-color: #0f5132;color: white"><h5>home</h5></div>-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<section class="row" id="sec">
+
+    <div class="col" id="label">
+        <div  class="homePageLbls container">
+            <div  class=" container">
+                <img src="https://img.icons8.com/external-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto/100/000000/external-customer-shopping-and-ecommerce-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto.png"/>
+                <h1>Customers</h1>
+                <h2>275</h2>
+            </div>
+            <div  class=" container">
+                <img src="https://img.icons8.com/material-outlined/100/000000/buy.png"/>
+                <h1>items</h1>
+                <h2>1500</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col bg-white m-4 pb-4">
+
+
+        <section id="sec01" >
+
+            <div class="row">
+                <div class="bg-black-75 mb-3 p-2"><h4>Customer Details</h4></div>
+                <div class="col-6">
+                    <caption>Customer ID :</caption>
+                    <form>
+                        <input class="form-control " id="txtCusId" type="text">
+                    </form>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <caption>Customer Name :</caption>
+                    <form>
+                        <input class="form-control " id="txtCusName" type="text">
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <caption>Date :</caption>
+                    <form>
+                        <input class="form-control " id="txtDate" type="text">
+                    </form>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <caption>Telephone Number :</caption>
+                    <form>
+                        <input class="form-control " id="txtname" type="text">
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <caption>Customer Address:</caption>
+                    <form>
+                        <input class="form-control " id="txtorAddress" type="text">
+                    </form>
+                </div>
+            </div>
+
+           <!-- <input id="inFile" name="inFile" type="file" class="file=upload-input" onchange="readURL(this)" accept="Image/">
+            <div class="row" id="image-preview">
+
+                <img src="" alt="image preview" class="image-preview__image">
+                <span class="image-preview__default-text"></span>
+                
+            </div>-->
+
+            <main>
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="col-12 col-md-4 mt-3 mt-md-0">
+                            <div class="box">
+                                <input type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
+                                <label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose a file&hellip;</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-5">
+                            <div class="image-container"><img id="selected-image"  src="" class="col-12 p-0" /></div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div id="log">
+							<span id="startPre">
+								<a id="startLink" href="#"></a>
+							</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+
+
+            <!---->
+            <div class="text-end col-6" id="videoDiv">
+                <video width="500" height="300" autoplay >
+                    <source src="assets/video/Medpharm%20Pharmacy%20%20%20Commercial%20Video.mp4" type="video/mp4">
+                   
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+    </div>
+    <div id="button1"  class="m-2">
+        <button type="button" class="btn btn-success" id="btnDelivery" >Delivery</button>
+        <button type="button" class="btn btn-success" id="btnTimeSlot" >Time Slot</button>
+
+
+    </div>
+
+
+</section>
+<section class="tbl">
+    <div class="table-details">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Item Code</th>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Price(LKR)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>I00-001</td>
+                <td>Salbutamol</td>
+                <td>500</td>
+                <td>1.75</td>
+            </tr>
+            <tr>
+                <td>I00-002</td>
+                <td>Deriphylline</td>
+                <td>400</td>
+                <td>2.75</td>
+            </tr>
+            <tr>
+                <td>I00-003</td>
+                <td>Predinisilon</td>
+                <td>1500</td>
+                <td>4.75</td>
+            </tr>
+            <tr>
+                <td>I00-004</td>
+                <td>Omeprazole</td>
+                <td>800</td>
+                <td>3.75</td>
+            </tr>
+            <tr>
+                <td>I00-005</td>
+                <td>Domperadone</td>
+                <td>2500</td>
+                <td>1.50</td>
+            </tr>
+            <tr>
+                <td>I00-006</td>
+                <td>Salbutamol</td>
+                <td>500</td>
+                <td>1.75</td>
+            </tr>
+            <tr>
+                <td>I00-007</td>
+                <td>Deriphylline</td>
+                <td>400</td>
+                <td>2.75</td>
+            </tr>
+            <tr>
+                <td>I00-008</td>
+                <td>Predinisilon</td>
+                <td>1500</td>
+                <td>4.75</td>
+            </tr>
+            <tr>
+                <td>I00-009</td>
+                <td>Omeprazole</td>
+                <td>800</td>
+                <td>3.75</td>
+            </tr>
+            <tr>
+                <td>I00-0010</td>
+                <td>Domperadone</td>
+                <td>2500</td>
+                <td>1.50</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<!--===================================================-->
+<section class="slot-container">
+    <div class="container" id="cash">
+        <h1>Your Slot And Time </h1>
+        <div>
+            <h2>Counter :</h2>
+            <div id="counter"></div>
+        </div>
+        <div>
+            <h2>Time :</h2>
+            <div id="time"></div>
+        </div>
+    </div>
+</section>
+
+<!--===================================================-->
+<section class="deliveryInfo" style="    display: block;
+    top: 232px;
+    width: 400px;
+    padding-left: 86px;
+    position: relative;
+    left: 36%;">
+    <div class="container" style="background-color: lightgreen;border-radius: 10px" id="delInfo">
+        <h4 class="id"></h4>
+        <h4 class="name"></h4>
+        <h4 class="address"></h4>
+        <h4 class="date"></h4>
+        <h4 class="med"></h4>
+    </div>
+</section>
+<script src="Js/tesseract-ocr.js"></script>
+
+<script>
+    var tempMed;
+    $(".slot-container").css('display','none');
+    $("#homeBtn").click(function () {
+        $(".slot-container").css('display','none');
+        $(".row").css('display','block');
+        $(".tbl").css('display','none');
+        $(".deliveryInfo").css('display','none');
+    })
+
+    var string ;
+    var counter;
+    var timeSlot;
+    var countAr=new Array();
+    loadCustID();
+    function loadCustID(){
+        count=1;
+        $("#txtCusId").val("C00-00"+count);
+        count++;
+    }
+    loadDate();
+
+    function loadDate(){
+        let today =new Date();
+        let dd=today.getDate();
+        let mm=today.getMonth()+1;
+        let yy=today.getFullYear();
+        let d=`${dd}-${mm}-${yy}`;
+        $("#txtDate").val(d);
+    }
+
+    $("#btnTimeSlot").click(function (){
+        $(".slot-container").css('display','block');
+        $(".row").css('display','none');
+        $(".tbl").css('display','none');
+        selectTimeSlot();
+       loadSlot();
+    });
+
+    function  selectTimeSlot(){
+        var tempName=String;
+        for ( var i =0; i<18; i++){
+            if(medicinesDB[i].getName()==tempName){
+                if(medicinesDB[i].getDisease()=="General"){
+                    counter="General Counter";
+                    countAr[0]="General Counter";
+                }else if(medicinesDB[i].getDisease()=="Emergency"){
+                    counter="Emergency Counter";
+                    countAr[0]="Emergency Counter";
+                }else if(medicinesDB[i].getDisease()=="Covid"){
+                    countAr[0]="Covid Counter";
+                }
+            }else{
+                countAr[0]="General Counter";
+            }
+        }
+        // console.log(counter);
+        var now = new Date(Date.now());
+        var formatted = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+        timeSlot= formatted ;
+    }
+
+
+
+    function loadSlot(){
+        console.log(countAr[0]);
+        console.log(timeSlot);
+        $("#counter").text(countAr[0]);
+        $("#time").text(timeSlot);
+    }
+
+
+    $("#btnDelivery").click(function () {
+       loadCustomerDetails();
+        $(".slot-container").css('display','none');
+        $(".row").css('display','none');
+        $(".tbl").css('display','none');
+        $(".deliveryInfo").css('display','block');
+
+    });
+function loadCustomerDetails() {
+var custID=$("#txtCusId").val();
+var custName=$("#txtCusName").val();
+var custDate=$("#txtDate").val();
+var custNum=$("#txtname").val();
+var custAddress=$("#txtorAddress").val();
+var custMed=tempArr[0];
+console.log(custID,custName,custDate,custAddress,custNum,tempArr[0]);
+$(".id").text("Customer Id :"+custID);
+$(".name").text("Customer Name :"+custName);
+$(".address").text("Customer Address :"+custAddress);
+$(".date").text("Date :"+custDate);
+$(".med").val("Medicine :"+custMed);
+
+}
+    var medicinesDB = new Array();
+    function pack (name,price,disease){
+        var name=name;
+        var price=price;
+        var disease=disease;
+
+        this.getName = function (){
+            return this.name;
+        }
+        this.getPrice = function (){
+            return this.price;
+        }
+        this.getDisease = function (){
+            return this.disease;
+        }
+
+        this.setName = function (name) {
+            this.name=name;
+        }
+        this.setPrice = function (price) {
+            this.price=price;
+        }
+        this.setDisease = function (disease) {
+            this.disease=disease;
+        }
+    }
+    var med1=new pack();
+    med1.setName("Gliclazide");
+    med1.setPrice("1.50");
+    med1.setDisease("General");
+    medicinesDB.push(med1);
+    var med2=new pack();
+    med2.setName("Glipizide");
+    med2.setPrice("1.50");
+    med2.setDisease("General");
+    medicinesDB.push(med2);
+    var med3=new pack();
+    med3.setName("Metformin");
+    med3.setPrice("1.50");
+    med3.setDisease("General");
+    medicinesDB.push(med3);
+    var med4=new pack();
+    med4.setName("Amlopine");
+    med4.setPrice("1.50");
+    med4.setDisease("General");
+    medicinesDB.push(med4);
+    var med5=new pack();
+    med5.setName("Mannitol");
+    med5.setPrice("1.50");
+    med5.setDisease("General");
+    medicinesDB.push(med5);
+    var med6=new pack();
+    med6.setName("Acetylcysteine");
+    med6.setPrice("1.50");
+    med6.setDisease("Emergency");
+    medicinesDB.push(med6);
+    var med7=new pack();
+    med7.setName("Enoxaparin");
+    med7.setPrice("1.50");
+    med7.setDisease("Emergency");
+    medicinesDB.push(med7);
+    var med8=new pack();
+    med8.setName("Prednisone");
+    med8.setPrice("1.50");
+    med8.setDisease("Emergency");
+    medicinesDB.push(med8);
+    var med9=new pack();
+    med9.setName("Salbutamol");
+    med9.setPrice("1.50");
+    med9.setDisease("Covid");
+    medicinesDB.push(med9);
+    var med10=new pack();
+    med10.setName("Salbutamol");
+    med10.setPrice("1.50");
+    med10.setDisease("Covid");
+    medicinesDB.push(med10);
+    var med11=new pack();
+    med11.setName("Deriphyllin");
+    med11.setPrice("1.50");
+    med11.setDisease("Covid");
+    medicinesDB.push(med11);
+    var med12=new pack();
+    med12.setName("Allermine");
+    med12.setPrice("1.50");
+    med12.setDisease("Covid");
+    medicinesDB.push(med12);
+    var med13=new pack();
+    med13.setName("A");
+    med13.setPrice("1.50");
+    med13.setDisease("Covid");
+    medicinesDB.push(med13);
+    var med14=new pack();
+    med14.setName("B");
+    med14.setPrice("1.50");
+    med14.setDisease("Covid");
+    medicinesDB.push(med14);
+    var med15=new pack();
+    med15.setName("C");
+    med15.setPrice("1.50");
+    med15.setDisease("Emergency");
+    medicinesDB.push(med15);
+    var med16=new pack();
+    med16.setName("D");
+    med16.setPrice("1.50");
+    med16.setDisease("Emergency");
+    medicinesDB.push(med16);
+    var med17=new pack();
+    med17.setName("E");
+    med17.setPrice("1.50");
+    med17.setDisease("General");
+    medicinesDB.push(med17);
+    var med18=new pack();
+    med18.setName("F");
+    med18.setPrice("1.50");
+    med18.setDisease("General");
+    medicinesDB.push(med18);
+
+</script>
+</body>
+</html>

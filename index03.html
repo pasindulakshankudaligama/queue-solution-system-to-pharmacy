@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slot</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        body{
+            background-color: #f7f7f7;
+        }
+        .container{
+            width:400px;
+            height:400px;
+            position: absolute;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            margin: auto;
+            /*border:1px solid red;*/
+        }
+        h1{
+            font-size: 1.5rem;
+            color:white;
+            background-color: #0a53be;
+            margin: 0;
+            padding:1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Your Slot And Time </h1>
+    <div>
+        <h2>Counter :</h2>
+        <div id="counter"></div>
+    </div>
+    <div>
+        <h2>Time :</h2>
+        <div id="time"></div>
+    </div>
+</div>
+<script src="Js/tesseract-ocr.js"></script>
+<script>
+    loadSlot();
+    function loadSlot(){
+        console.log(countAr[0]);
+        console.log(timeSlot);
+        $("#counter").text(counter);
+        $("#time").text(timeSlot);
+    }
+</script>
+</body>
+</html>
